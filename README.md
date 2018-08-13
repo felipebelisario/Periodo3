@@ -1,1 +1,1 @@
-# Partiu se ferrar em mais um período
+Partiu se ferrar em mais um período
