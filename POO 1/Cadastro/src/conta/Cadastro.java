@@ -12,19 +12,19 @@ public class Cadastro {
 	}
 	
 	public String buscar(int posicao){
-		return nomes[posicao];
+		return this.nomes[posicao];
 	}
 	
 	public int posicao(String nome){
 		for(int i=0;i<cont;i++){
-			if(nomes[i].equals(nome)) return i;
+			if(this.nomes[i].equals(nome)) return i;
 		}
 		return -1;
 	}
 	
 	public boolean existe(String nome){
 		for(int i=0;i<cont;i++){
-			if(nomes[i].equals(nome)) return true;
+			if(this.nomes[i].equals(nome)) return true;
 		}
 		return false;
 	}
@@ -32,7 +32,7 @@ public class Cadastro {
 	public void excluir(int pos){
 		if(pos!=MAX-1){
 			for(int i=pos;i<cont;i++){
-			nomes[i] = nomes[i+1];
+			this.nomes[i] = this.nomes[i+1];
 			}
 			cont--;
 		}
@@ -41,7 +41,7 @@ public class Cadastro {
 	
 	public void excluir(String nome){
 		for(int i=0;i<cont;i++){
-			if(nomes[i].equals(nome)){
+			if(this.nomes[i].equals(nome)){
 				this.excluir(i);
 			}
 		}
@@ -81,6 +81,13 @@ public class Cadastro {
 		
 		System.out.println("\nClientes cadastrados ate o momento: ");
 		c1.printCadastros();
+		
+		System.out.print("\nExiste o cliente: ");
+		nome = sc.nextLine();
+		
+		boolean isTrue = c1.existe(nome);
+		
+		System.out.println(isTrue);
 	}
 }
 	
