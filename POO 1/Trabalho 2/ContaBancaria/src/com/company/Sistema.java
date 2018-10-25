@@ -1,4 +1,5 @@
 package com.company;
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 public class Sistema {
@@ -25,16 +26,19 @@ public class Sistema {
                         System.out.print("Valor a depositar: ");
                         double valor = sc.nextDouble();
                         c.depositar(valor);
+                        JOptionPane.showMessageDialog(null,"O dinheiro foi depositado!","Sucesso!",JOptionPane.PLAIN_MESSAGE);
                         System.out.print("\n");
                         break;
                     case 2 :
                         System.out.print("Valor a sacar: ");
                         valor = sc.nextDouble();
                         c.sacar(valor);
+                        JOptionPane.showMessageDialog(null,"O dinheiro foi sacado!","Sucesso!",JOptionPane.PLAIN_MESSAGE);
                         System.out.print("\n");
                         break;
                     case 3 :
                         System.out.println("O saldo atual é: " + c.getSaldo() + " reais \n");
+                        JOptionPane.showMessageDialog(null,"O saldo atual é: " + c.getSaldo() + " reais","Informação:",JOptionPane.INFORMATION_MESSAGE);
                         break;
                     case 4 :
                         System.exit(0);
@@ -44,9 +48,9 @@ public class Sistema {
                 }
 
             } catch (IllegalArgumentException e) {
-                System.out.println("\nErro! Valor negativo!\n");
+                JOptionPane.showMessageDialog(null,e.toString(),"ERRO!",JOptionPane.ERROR_MESSAGE);
             } catch (EstouroDeLimiteException e){
-                System.out.println("\nErro! Estouro de limite de crédito!\n");
+                JOptionPane.showMessageDialog(null,e.toString(),"ERRO!",JOptionPane.ERROR_MESSAGE);
             }
         }
     }
