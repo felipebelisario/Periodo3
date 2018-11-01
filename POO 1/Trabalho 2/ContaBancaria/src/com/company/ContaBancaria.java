@@ -5,7 +5,7 @@ public class ContaBancaria {
     private double saldo = 0;
     private double limite_credito;
 
-    public ContaBancaria(String nome, double limite) throws IllegalArgumentException{
+    public ContaBancaria(String nome, double limite){
         proprietario = nome;
         limite_credito = limite;
     }

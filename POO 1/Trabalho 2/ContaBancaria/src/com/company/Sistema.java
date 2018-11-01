@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 public class Sistema {
-    public static void main(String[] args) throws IllegalArgumentException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Nome do proprietario: ");
@@ -37,8 +37,8 @@ public class Sistema {
                         System.out.print("\n");
                         break;
                     case 3 :
-                        System.out.println("O saldo atual é: " + c.getSaldo() + " reais \n");
                         JOptionPane.showMessageDialog(null,"O saldo atual é: " + c.getSaldo() + " reais","Informação:",JOptionPane.INFORMATION_MESSAGE);
+                        System.out.print("\n");
                         break;
                     case 4 :
                         System.exit(0);
