@@ -2,7 +2,7 @@
 # Matrícula: 11721BCC030
 # 3º período em Ciêcia da Computação
 
-# Esse programa calcula uma sequencia de numeros a partir de um primeiro termo utilizando a Conjectura de Collatz
+# Esse programa calcula uma sequencia de numeros a partir de um primeiro termo utilizando pilha e a Conjectura de Collatz
 
 
 .data
@@ -32,41 +32,42 @@
 	
 		move $a2, $v0				# Move o termo lido para $a2
 	
-		addi $sp, $sp, -4
+		addi $sp, $sp, -4			# Cria pilha com 4 bytes (1 inteiro) e armazena o inteiro lido nela
 		sw $a2, 0($sp)
 	
 		li $v0, 4				# Syscall para printar a string lista
 		la $a0, lista		
 		syscall
 		
-		j WHILE
+		j WHILE					# Jump para loop WHILE
 		
 		WHILE:			
 		
-		jal collatz
-		
+		jal collatz				# Dentro do WHILE, a cada loop remove-se o inteiro atual da pilha
+							# e o proximo termo na sequencia eh colocado em seu lugar
 		li $s4, 1
-		beq $a2, $s4, END
+		beq $a2, $s4, END			# Se o inteiro chegar a 1 va para END
 			
-		j WHILE			# Chama a funcao calculaTermo para o calculo dos proximos termos
+		j WHILE			
 	
-		END:
+		END:					# Declaracao do fim do loop
 		
 		li $v0, 10				# Encerra o programa
 		syscall
 	
 	
-	collatz:			# Declaracao da funcao calculaTermo	
-		lw $a2,0($sp)
+	collatz:					# Declaracao da funcao collatz
+	
+		lw $a2,0($sp)				# Carrega o termo na pilha para a2
 		
-		j calculaTermo
+		j calculaTermo				# Jump para calcula termo
 		
-	calculaTermo:
+	calculaTermo:		
 	
 		li $s4, 1
-		beq $a2, $s4, END_2
+		beq $a2, $s4, END_2			# Se a2 for 1 va para END_2
 		
-		div $a2,$a1			# Divide o termo por 2
+		div $a2,$a1				# Divide o termo por 2
 		mfhi $s0				# Move resto da divisao para $s0
 				
 		beqz $s0, sePar				# Se o resto for igual a zero chama a funcao sePar
@@ -90,11 +91,11 @@
 		la $a0, virgula				#    |
 		syscall					# ---
 	
-		addi $sp,$sp, 4
+		addi $sp,$sp, 4				# Remove elemento da pilha e coloca o proximo inteiro da sequencia em seu lugar
 		addi $sp,$sp,-4
 		sw $a2, 0($sp)
 		
-		jr $ra			# Chama a funcao calculaTermo novamente para o calculo do proximo termo
+		jr $ra					# Retorna onde o operador jal foi usado
 		
 
 		
@@ -119,11 +120,11 @@
 
 		addi $sp,$sp, 4
 		addi $sp,$sp,-4
-		sw $a2, 0($sp)		# Chama a funcao calculaTermo novamente para o calculo do proximo termo
+		sw $a2, 0($sp)
 			
 		jr $ra
 		
-	END_2:
+	END_2:						# Declaracao da funcao END_2 que retorna para a main para finalizar o programa
 	
 		li $v0, 1				
 		move $a0, $a2				
